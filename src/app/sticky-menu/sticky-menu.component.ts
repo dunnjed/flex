@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Inject, HostListener, OnInit, Output } from '@angular/core';
+import { element } from 'protractor';
+import { Component, EventEmitter, ElementRef, Inject, Input, HostListener, OnChanges, OnInit, Output } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
@@ -6,12 +7,15 @@ import { DOCUMENT } from '@angular/platform-browser';
   templateUrl: './sticky-menu.component.html',
   styleUrls: ['./sticky-menu.component.scss']
 })
-export class StickyMenuComponent implements OnInit {
-  window: Window;
-  navIsFixed = false;
-  @Output() moved = new EventEmitter<number>();
+export class StickyMenuComponent implements OnChanges, OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  window: Window;
+  fixedMenu = false;
+  @Input() parentTopPosition;
+  @Input() parentWidth;
+  @Input() parentPadding;
+
+  constructor(private elementRef: ElementRef) {
 
   }
 
@@ -19,16 +23,28 @@ export class StickyMenuComponent implements OnInit {
     this.window = window;
   }
 
+  ngOnChanges() {
+    if (this.parentTopPosition) {
+      console.log('parentTopPosition', this.parentTopPosition);
+    }
+
+    if (this.parentWidth) {
+      console.log('parentWidth', this.parentWidth);
+    }
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    const number = this.window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-    // console.log('OFFSET', number);
-    this.moved.emit(number);
-    if (number > 100) {
-      this.navIsFixed = true;
-    } else if (this.navIsFixed && number < 10) {
-      this.navIsFixed = false;
+    if (this.parentTopPosition <= 0) {
+      this.fixedMenu = true;
+    } else {
+      this.fixedMenu = false;
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  sizeChange(event) {
+    // console.log('size changed.', event);
   }
 
 }

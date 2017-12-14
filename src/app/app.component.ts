@@ -9,7 +9,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 export class AppComponent implements AfterViewInit, OnInit {
 
   @ViewChild('colSection') colSection: ElementRef;
-  @Input() navIsFixed = false;
+  parentPadding = 0;
   constructor() {
 
   }
@@ -23,19 +23,6 @@ export class AppComponent implements AfterViewInit, OnInit {
     const paddingRight = parseInt(window.getComputedStyle(this.colSection.nativeElement, null).getPropertyValue('padding-right'), 10);
     console.log('paddingLeft', paddingLeft);
     console.log('paddingRight', paddingRight);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  sizeChange(event) {
-    console.log('size changed.', event);
-  }
-
-  movedHandler(position) {
-    console.log('MOVED', position);
-    if (position > 40) {
-      this.navIsFixed = true;
-    } else if (this.navIsFixed && position < 40) {
-      this.navIsFixed = false;
-    }
+    this.parentPadding = paddingLeft + paddingRight;
   }
 }

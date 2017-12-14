@@ -4,7 +4,7 @@
 <div class="flex-container">
 
   <div #colSection class="col-section">
-    <app-sticky-menu></app-sticky-menu>
+    <app-sticky-menu [parentTopPosition]="colSection.getBoundingClientRect().top" [parentWidth]="colSection.clientWidth" [parentPadding]="parentPadding"></app-sticky-menu>
     <div class="text-section"></div>
     <div class="text-section"></div>
     <div class="text-section"></div>
