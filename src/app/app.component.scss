@@ -1,0 +1,49 @@
+.top-menu {
+  width: 100%;
+  height: 120px;
+  background-color: lightcyan;
+  position: relative;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.col-section {
+  display: flex;
+  flex-direction: column;
+  height: 1000px;
+  padding: 20px;
+  background-color: lightskyblue;
+}
+
+.col-section:nth-child(1) {
+  width: 65%;
+  position: relative;
+  padding-top: 0;
+}
+
+.col-section:nth-child(2) {
+  width: 35%;
+  background-color: lightcyan;
+}
+
+.sticky-menu {
+  position: relative;
+  height: 200px;
+  background-color: lightsteelblue;
+  margin: 40px 20px 20px;
+  z-index: 100;
+}
+
+.text-section {
+  position: relative;
+  height: 600px;
+  background-color: lightgray;
+  margin: 20px;
+}
+
+.fixed {
+  position: fixed;
+  margin-top: 0;
+}
