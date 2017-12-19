@@ -17,6 +17,10 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngOnInit() {
   }
 
+  handleUpdate($event) {
+    console.log($event);
+  }
+
   // https://stackoverflow.com/questions/41060506/angular2-elementref-get-css-padding-attribute
   ngAfterViewInit() {
     const paddingLeft = parseInt(window.getComputedStyle(this.colSection.nativeElement, null).getPropertyValue('padding-left'), 10);

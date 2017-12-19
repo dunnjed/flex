@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Component, EventEmitter, ElementRef, Inject, Input, HostListener, OnChanges, OnInit, Output } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -7,13 +6,12 @@ import { DOCUMENT } from '@angular/platform-browser';
   templateUrl: './sticky-menu.component.html',
   styleUrls: ['./sticky-menu.component.scss']
 })
-export class StickyMenuComponent implements OnChanges, OnInit {
+export class StickyMenuComponent implements OnInit {
 
   window: Window;
   fixedMenu = false;
-  @Input() parentTopPosition;
-  @Input() parentWidth;
-  @Input() parentPadding;
+  @Input() parent;
+  @Input() height;
 
   constructor(private elementRef: ElementRef) {
 
@@ -23,19 +21,10 @@ export class StickyMenuComponent implements OnChanges, OnInit {
     this.window = window;
   }
 
-  ngOnChanges() {
-    if (this.parentTopPosition) {
-      console.log('parentTopPosition', this.parentTopPosition);
-    }
-
-    if (this.parentWidth) {
-      console.log('parentWidth', this.parentWidth);
-    }
-  }
-
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if (this.parentTopPosition <= 0) {
+    const top = this.parent.getBoundingClientRect().top;
+    if (top <= 0) {
       this.fixedMenu = true;
     } else {
       this.fixedMenu = false;

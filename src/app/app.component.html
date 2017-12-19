@@ -4,7 +4,15 @@
 <div class="flex-container">
 
   <div #colSection class="col-section">
-    <app-sticky-menu [parentTopPosition]="colSection.getBoundingClientRect().top" [parentWidth]="colSection.clientWidth" [parentPadding]="parentPadding"></app-sticky-menu>
+    <app-sticky-menu [parent]="colSection" [height]="60">
+      <app-btn-menu (updateData)="handleUpdate($event)"></app-btn-menu>
+    </app-sticky-menu>
+    <div class="text-section"></div>
+    <div class="text-section"></div>
+    <div class="text-section"></div>
+    <div class="text-section"></div>
+    <div class="text-section"></div>
+    <div class="text-section"></div>
     <div class="text-section"></div>
     <div class="text-section"></div>
     <div class="text-section"></div>
